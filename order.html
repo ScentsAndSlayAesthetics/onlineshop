@@ -92,9 +92,11 @@
     <div id="orderItems" class="order-box"></div>
 
     <h3>Total: <span id="totalAmount">Ghc 0.00</span></h3>
-
-    <button onclick="sendWhatsApp()">Send Order on WhatsApp</button>
-    <button class="email-btn" onclick="sendEmail()">Send Order by Email</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="sendWhatsApp()">Send Order on WhatsApp</button>
+      <button class="email-btn" onclick="sendEmail()">Send Order by Email</button>
+      <button id="copyImagesBtn" onclick="copyImageURLs()" style="background:#333;color:#fff;border:none;padding:10px;border-radius:5px;">Copy Image URLs</button>
+    </div>
   </div>
 
 <script>
@@ -154,6 +156,18 @@
       return;
     }
 
+    function getImageUrl(img) {
+      if(!img) return '';
+      // If already absolute
+      if(img.startsWith('http://') || img.startsWith('https://')) return img;
+      // Normalize leading slashes
+      img = img.replace(/^\.\//, '').replace(/^\//, '');
+      // If it already contains images/ assume relative path on site
+      if(img.includes('images/')) img = img.split('images/').pop();
+      const base = 'https://scentsandslayaesthetics.github.io/onlineshop/';
+      return base + img;
+    }
+
     let message = `🔥 *New Order From Scents & Slay Website* 🔥\n\n`;
     message += `👤 *Customer Details*\n`;
     message += `• Name: ${name}\n`;
@@ -165,13 +179,15 @@
 
     cart.forEach(i => {
       message += `• ${i.name} (x${i.qty}) - Ghc ${(i.price * i.qty).toFixed(2)}\n`;
+      const url = getImageUrl(i.img || i.image || i.imgPath || '');
+      if(url) message += `Preview: ${url}\n`;
     });
 
     let total = cart.reduce((s, i) => s + i.price * i.qty, 0);
     message += `-------------------------\n`;
     message += `💵 *Total: Ghc ${total.toFixed(2)}*\n`;
 
-    const businessNumber = "233531360011";
+    const businessNumber = "233204200817";
     const url = `https://wa.me/${businessNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   }
@@ -203,10 +219,21 @@
       return;
     }
 
+    function getImageUrl(img) {
+      if(!img) return '';
+      if(img.startsWith('http://') || img.startsWith('https://')) return img;
+      img = img.replace(/^\.\//, '').replace(/^\//, '');
+      if(img.includes('images/')) img = img.split('images/').pop();
+      const base = 'https://scentsandslayaesthetics.github.io/onlineshop/';
+      return base + img;
+    }
+
     let message = `New Order:\n\nName: ${name}\nPhone: ${phone}\nLocation: ${location}\n\nItems:\n`;
 
     cart.forEach(i => {
       message += `- ${i.name} (x${i.qty}) - Ghc ${(i.price * i.qty).toFixed(2)}\n`;
+      const url = getImageUrl(i.img || i.image || i.imgPath || '');
+      if(url) message += `  Preview: ${url}\n`;
     });
 
     let total = cart.reduce((s,i)=>s + i.price * i.qty, 0);
@@ -218,6 +245,28 @@
       return;
     }
     window.location.href = `mailto:${email}?subject=New Order from Scents & Slay&body=${encodeURIComponent(message)}`;
+  }
+
+  // Copy image URLs helper - copies a newline-separated list of image URLs for preview
+  function copyImageURLs() {
+    const cart = getCart();
+    if(cart.length === 0) { alert('Cart is empty.'); return; }
+    function getImageUrl(img) {
+      if(!img) return '';
+      if(img.startsWith('http://') || img.startsWith('https://')) return img;
+      img = img.replace(/^\.\//, '').replace(/^\//, '');
+      if(img.includes('images/')) img = img.split('images/').pop();
+      const base = 'https://scentsandslayaesthetics.github.io/onlineshop/';
+      return base + img;
+    }
+    const urls = cart.map(i => getImageUrl(i.img || i.image || i.imgPath || '')).filter(Boolean);
+    if(urls.length === 0) { alert('No image URLs found in cart items.'); return; }
+    const text = urls.join('\n');
+    if(navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(()=>{ alert('Image URLs copied to clipboard.'); }).catch(()=>{ prompt('Copy these URLs:', text); });
+    } else {
+      prompt('Copy these URLs:', text);
+    }
   }
 
   loadOrder();
