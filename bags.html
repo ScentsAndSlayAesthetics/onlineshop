@@ -726,6 +726,31 @@
       if (e.key === 'ArrowRight') modalNext.click();
     }
   });
+  // Swipe support inside modal for touch devices
+  const modalSliderEl = document.getElementById('modalSlider');
+  let modalTouchStartX = 0;
+  let modalTouchCurrentX = 0;
+
+  if (modalSliderEl) {
+    modalSliderEl.addEventListener('touchstart', (ev) => {
+      modalTouchStartX = ev.touches[0].clientX;
+      modalTouchCurrentX = modalTouchStartX;
+    }, {passive: true});
+
+    modalSliderEl.addEventListener('touchmove', (ev) => {
+      modalTouchCurrentX = ev.touches[0].clientX;
+    }, {passive: true});
+
+    modalSliderEl.addEventListener('touchend', (ev) => {
+      const diff = modalTouchStartX - modalTouchCurrentX;
+      if (Math.abs(diff) > 40 && modalImages.length) {
+        if (diff > 0) modalNext.click(); // swipe left -> next
+        else modalPrev.click(); // swipe right -> prev
+      }
+      modalTouchStartX = 0;
+      modalTouchCurrentX = 0;
+    });
+  }
 document.querySelectorAll(".img-slider").forEach(slider => {
   const slides = slider.querySelector(".slides");
   const images = slider.querySelectorAll("img");
