@@ -58,7 +58,7 @@
     footer{background:#222;color:#ddd;text-align:center;padding:18px;margin-top:28px}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
     @media (max-width:768px){.category-box{display:none}.container{max-width:100%;padding:0 12px}}
-    @media (max-width:600px){nav a{display:none}.searchbar{flex-direction:column;width:100%}.searchbar input{width:100%;padding:10px 12px}.searchbar button{padding:10px 14px;min-height:44px}button.add{padding:12px 14px;min-height:44px}.cart-btn{padding:14px 18px;min-width:50px;min-height:50px}h1{font-size:20px}.modal{width:95vw}.footer{font-size:12px;padding:14px 8px}}
+    @media (max-width:600px){header{padding:12px 14px;flex-wrap:wrap}header h2{font-size:16px}nav{display:flex;gap:8px;flex-wrap:nowrap}nav a{font-size:12px}nav a:not(:first-child){display:none}.header-actions{flex-wrap:nowrap;align-items:center}.searchbar{flex-direction:row;width:auto;flex:1;min-width:0;gap:6px}.searchbar input{width:100%;padding:10px 12px}.searchbar button{padding:10px 14px;min-height:44px}button.add{padding:12px 14px;min-height:44px}.cart-btn{padding:14px 18px;min-width:50px;min-height:50px}h1{font-size:20px}.modal{width:95vw}.footer{font-size:12px;padding:14px 8px}}
     /* ===== CATEGORY BOX ===== */
     .category-box {
       width: 300px;
@@ -454,6 +454,17 @@
       document.querySelectorAll('.dropdown-content').forEach(dc => dc.style.display = 'none');
     }
   });
+   // Disable add buttons for out-of-stock cards (no valid data-price)
+      document.querySelectorAll('.card').forEach(card => {
+        const btn = card.querySelector('.add');
+        const price = parseFloat(card.dataset.price);
+        if(isNaN(price)){
+          btn.disabled = true;
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'not-allowed';
+          btn.textContent = 'Out of stock';
+        }
+      });
 </script>
 </body>
 </html>

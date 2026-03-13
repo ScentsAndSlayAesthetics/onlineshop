@@ -27,7 +27,10 @@
     header{background:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.06);position:sticky;top:0;z-index:40}
     .brand{display:flex;align-items:center;gap:12px}
     .brand img{width:52px;height:52px;border-radius:8px;object-fit:cover}
-    nav a{margin-left:14px;text-decoration:none;color:#222;font-weight:600}
+    .header-actions{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;width:100%;}
+    .searchbar{flex:1;min-width:240px;max-width:480px;display:flex;align-items:center;gap:8px;}
+    nav{display:flex;align-items:center;gap:12px;}
+    nav a{margin-left:0;text-decoration:none;color:#222;font-weight:600}
     .dropdown { position: relative; display: inline-block; }
     .dropdown-content { display: none; position: absolute; background: white; min-width: 160px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border-radius: 5px; padding: 10px 0; z-index: 200; }
     .dropdown-content a { display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 14px; }
@@ -174,7 +177,7 @@
     .modal-slider .dots span.active { background: var(--accent); }
 
     @media (max-width:768px){.category-box{display:none}}
-    @media (max-width:600px){nav a{display:none}h1{font-size:20px}.items{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));padding:0 8px}.card{padding:8px}.card button{padding:10px 12px;min-height:40px}.cart-btn{padding:12px 16px;min-width:48px;min-height:48px}.modal{width:95vw;max-width:100%}.image-modal{max-width:95vw;max-height:90vh}.footer{font-size:12px;padding:12px 8px}}
+    @media (max-width:600px){header{padding:12px 14px;flex-wrap:wrap}header h2{font-size:16px}nav{display:flex;gap:8px;flex-wrap:nowrap}nav a{font-size:12px}nav a:not(:first-child){display:none}.header-actions{flex-wrap:nowrap;align-items:center}.searchbar{flex-direction:row;width:auto;flex:1;min-width:0;gap:6px}h1{font-size:20px}.items{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));padding:0 8px}.card{padding:8px}.card button{padding:10px 12px;min-height:40px}.cart-btn{padding:12px 16px;min-width:48px;min-height:48px}.modal{width:95vw;max-width:100%}.image-modal{max-width:95vw;max-height:90vh}.footer{font-size:12px;padding:12px 8px}}
     @media (max-width:480px){.image-modal{padding:8px;max-height:85vh}.image-modal img{max-height:70vh}}
     /* =========================
    MOBILE CATEGORY SIDEBAR FIX
@@ -313,7 +316,7 @@
       </div>
     </div>
 
-    <div style="display:flex;gap:18px;align-items:center">
+    <div class="header-actions">
       <div class="searchbar">
         <label for="search" class="sr-only">Search bags</label>
         <input id="search" placeholder="Search bags..." oninput="filterCards()" />

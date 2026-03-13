@@ -256,8 +256,9 @@
     @media (max-width: 600px) {
       header { padding: 12px 14px; flex-wrap: wrap; }
       header h2 { font-size: 16px; }
-      nav { display: none; }
+      nav { display: flex; gap: 8px; flex-wrap: wrap; }
       nav a { font-size: 12px; }
+      nav a:not(:first-child) { display: none; }
       #searchInput { padding: 10px 12px; width: 100%; }
       button { padding: 10px 12px; min-height: 44px; font-size: 14px; }
       .cart-btn { padding: 12px 16px; min-width: 48px; min-height: 48px; font-size: 14px; }
@@ -733,6 +734,17 @@
       document.querySelectorAll('.dropdown-content').forEach(dc => dc.style.display = 'none');
     }
   });
+   // Disable add buttons for out-of-stock cards (no valid data-price)
+      document.querySelectorAll('.card').forEach(card => {
+        const btn = card.querySelector('.add');
+        const price = parseFloat(card.dataset.price);
+        if(isNaN(price)){
+          btn.disabled = true;
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'not-allowed';
+          btn.textContent = 'Out of stock';
+        }
+      });
 </script>
 
 </body>
