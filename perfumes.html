@@ -198,7 +198,7 @@
       <div class="card" data-name="ASAD " data-price="65.00"><img src="https://scentsandslayaesthetics.github.io/onlineshop/p3.jpeg" alt="ASAD"><h4>ASAD </h4><div class="price">Ghc 65.00</div><button class="add" onclick="addToCart(this)">Add to Cart</button></div>
       <div class="card" data-name="YARA CANDY" data-price="65.00"><img src="https://scentsandslayaesthetics.github.io/onlineshop/p4.jpeg" alt="YARA CANDY"><h4>YARA CANDY</h4><div class="price">Ghc 65.00</div><button class="add" onclick="addToCart(this)">Add to Cart</button></div>
       <div class="card" data-name="YARA TOUS" data-price="180.00"><img src="https://scentsandslayaesthetics.github.io/onlineshop/p5.jpeg" alt="YARA TOUS"><h4>YARA TOUS</h4><div class="price">Ghc 180.00</div><button class="add" onclick="addToCart(this)">Add to Cart</button></div>
-      
+    </div>
   </main>
 
   <div class="cart-btn" id="cartBtn" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
@@ -254,9 +254,12 @@
     document.getElementById('cartModal').style.display='flex';
   }
 
-  document.getElementById('cartModal').addEventListener('click', (e)=>{
-    if(e.target.id==='cartModal') e.target.style.display='none';
-  });
+  const cartModal = document.getElementById('cartModal');
+  if (cartModal) {
+    cartModal.addEventListener('click', (e)=>{
+      if(e.target.id==='cartModal') e.target.style.display='none';
+    });
+  }
 
   function renderCart(){
     const items=getCart();
@@ -358,12 +361,15 @@
     document.getElementById("categoryDropdown").classList.toggle("active");
   }
 
-  document.getElementById('closeCart').addEventListener('click', ()=>{
-    document.getElementById('cartModal').style.display='none';
-  });
+  const closeCartBtn = document.getElementById('closeCart');
+  if (closeCartBtn) {
+    closeCartBtn.addEventListener('click', ()=>{
+      if (cartModal) cartModal.style.display='none';
+    });
+  }
 
   window.addEventListener('keydown', (e)=>{
-    if(e.key==='Escape') document.getElementById('cartModal').style.display='none';
+    if(e.key==='Escape' && cartModal) cartModal.style.display='none';
   });
 
   // Image preview modal

@@ -184,6 +184,7 @@
 
     <div style="display:flex;gap:18px;align-items:center">
       <div class="searchbar">
+        <label for="search" class="sr-only">Search nails</label>
         <input id="search" placeholder="Search nails..." oninput="filterCards()" />
         <button onclick="filterCards()">Search</button>
       </div>
@@ -272,7 +273,17 @@
     </div>
   </div>
 
-  <div class="modal-back" id="cartModal"><div class="modal"><h3>Your Cart</h3><div id="cartItems"></div><div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center"><strong>Subtotal:</strong><div id="subtotal">$0.00</div></div><div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end"><button onclick="clearCart()" style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer">Clear</button><button onclick="checkout()" style="padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer">Checkout</button></div></div></div>
+  <div class="modal-back" id="cartModal">
+    <div class="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <h3 style="margin:0">Your Cart</h3>
+        <button id="closeCart" aria-label="Close cart" style="background:transparent;border:0;font-size:20px;cursor:pointer;color:#666">✕</button>
+      </div>
+      <div id="cartItems"></div>
+      <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center"><strong>Subtotal:</strong><div id="subtotal">Ghc 0.00</div></div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end"><button onclick="clearCart()" style="padding:8px 10px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer">Clear</button><button onclick="checkout()" style="padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer">Checkout</button></div>
+    </div>
+  </div>
 
   <footer><div class="container" style="max-width:1100px;margin:0 auto"><p style="margin:8px 0 0">© 2026 Scents & Slay Aesthetics — All rights reserved</p></div></footer>
 

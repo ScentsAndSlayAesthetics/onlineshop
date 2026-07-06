@@ -452,9 +452,13 @@ function addToCart(btn){
     document.getElementById("categoryDropdown").classList.toggle("active");
   }
 
-  document.getElementById('closeCart').addEventListener('click', ()=>{
-    document.getElementById('cartModal').style.display='none';
-  });
+  const closeCartBtn = document.getElementById('closeCart');
+  if (closeCartBtn) {
+    closeCartBtn.addEventListener('click', ()=>{
+      const cartModal = document.getElementById('cartModal');
+      if (cartModal) cartModal.style.display='none';
+    });
+  }
 
   window.addEventListener('keydown', (e)=>{
     if(e.key==='Escape') document.getElementById('cartModal').style.display='none';
