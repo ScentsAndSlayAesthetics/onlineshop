@@ -81,7 +81,7 @@
       display: block;
       padding: 10px 15px;
       text-decoration: none;
-      color: #ee5f06;
+      color: #ea0661;
     }
 
     .dropdown:hover .dropdown-content {
@@ -126,7 +126,7 @@
       margin-top: 10px;
       padding: 8px 12px;
       border: none;
-      background-color: #ff6600;
+      background-color: #800020;
       color: white;
       border-radius: 5px;
       cursor: pointer;
@@ -137,7 +137,7 @@
       position: fixed;
       right: 20px;
       bottom: 20px;
-      background: #ff6600;
+      background: #800020;
       padding: 12px 16px;
       color: white;
       border-radius: 50px;
@@ -220,7 +220,7 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background: #ff6600;
+      background: #800020;
       color: white;
       border: none;
       border-radius: 50%;
@@ -234,7 +234,7 @@
     }
 
     .image-modal .close-btn:hover {
-      background: #cc5200;
+      background: #800020;
     }
 
     .card img {
@@ -266,7 +266,7 @@
       .card { padding: 10px; }
       .modal { width: 95vw; max-width: 100%; padding: 12px; }
       .image-modal { max-width: 95vw; max-height: 90vh; padding: 12px; }
-      footer { font-size: 12px; padding: 12px 8px; }
+       footer { text-align:center; padding:18px; color:#fff; font-size:14px; margin-top:40px; background:#000; }
     }
     @media (max-width: 480px) {
       .image-modal { padding: 8px; max-height: 85vh; }
@@ -298,7 +298,7 @@
 
     .menu-icon {
       font-size: 20px;
-      color: orange;
+      color: #800020;
     }
 
     /* ===== DROPDOWN ===== */
@@ -346,7 +346,7 @@
     }
 
     .category-list a:hover {
-      color: orange;
+      color: #800020;
     }
 
     .category-list i {
@@ -517,11 +517,7 @@
       <button onclick="clearCart()" style="background:#d33;margin-left:10px;">Clear</button>
     </div>
   </div>
-
-  <footer>
-    <p>&copy; 2026 Scents & Slay Aesthetics. All rights reserved.</p>
-  </footer>
-
+  <footer>© 2026 Scents & Slay Aesthetics — All rights reserved</footer>
 <script>
   // CART FUNCTIONS
   function getCart(){ return JSON.parse(localStorage.getItem('bs_cart')||'[]') }
